@@ -3,8 +3,11 @@ package com.demoAI.spring_ai_;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
 @SpringBootApplication
+@EnableCaching
 public class SpringAiApplication {
 	public static void main(String[] args) {
 		// Set the timezone to Asia/Ho_Chi_Minh

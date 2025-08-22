@@ -14,6 +14,7 @@ import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.content.Media;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,7 @@ public class ChatService {
 
     public ChatService(ChatClient.Builder builder, JdbcChatMemoryRepository jdbcChatMemoryRepository) {
 
+        //Automation save request to database
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
                 .chatMemoryRepository(jdbcChatMemoryRepository)
                 .maxMessages(30)
@@ -61,13 +63,14 @@ public class ChatService {
                 .data(file.getResource())
                 .build();
 
+        //Set the creative of AI
         ChatOptions chatOptions = ChatOptions.builder()
                 .temperature(0D)
                 .build();
 
         return chatClient.prompt()
                 .options(chatOptions)
-                .system("You are DST.AI")
+                .system("You are TroUni")
                 .user(promptUserSpec
                 ->promptUserSpec.media(media)
                 .text(message)
